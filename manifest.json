@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+  "name": "Pivotal Linked Github",
+  "description": "Adds links to the pivotal-style syntax used in messages",
+  "version": "0.0.1",
+  "author": "Ivan Tse",
+
+  "content_scripts" : [{
+    "matches" : [
+      "https://github.com/*"
+    ],
+    "include_globs": [
+      "*pull*",
+      "*commit*"
+    ],
+    "js": [ "pivotal-linked-github.js" ]
+  }]
+}
