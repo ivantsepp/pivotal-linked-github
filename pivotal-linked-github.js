@@ -109,15 +109,22 @@
     addPivotalLinksTo(curNode, matches.slice(1), baseIndex + index + matches[0].storyId.length, anchorParent);
   }
 
-  var nodes = document.querySelectorAll('.comment-body, .commit-title, .commit-message');
+  function findAllStoriesAndLinkToPivotal(){
+    var nodes = document.querySelectorAll('.comment-body, .commit-title, .commit-message');
 
-  for (var i = 0; i < nodes.length; i++){
-    var textNodes = getTextNodesUnder(nodes[i]);
-    for (var j = 0; j< textNodes.length; j++){
-      var text = textNodes[j].nodeValue;
-      var matches = getPivotalStoryIds(text);
-      var anchorNode = getAnchorParentNode(textNodes[j], nodes[i]);
-      addPivotalLinksTo(textNodes[j], matches, 0, anchorNode);
+    for (var i = 0; i < nodes.length; i++){
+      var textNodes = getTextNodesUnder(nodes[i]);
+      for (var j = 0; j< textNodes.length; j++){
+        var text = textNodes[j].nodeValue;
+        var matches = getPivotalStoryIds(text);
+        var anchorNode = getAnchorParentNode(textNodes[j], nodes[i]);
+        addPivotalLinksTo(textNodes[j], matches, 0, anchorNode);
+      }
     }
   }
+  findAllStoriesAndLinkToPivotal();
+  $(document).on('pjax:end', function() {
+   findAllStoriesAndLinkToPivotal();
+  })
+
 }());
