@@ -123,8 +123,16 @@
     }
   }
   findAllStoriesAndLinkToPivotal();
-  $(document).on('pjax:end', function() {
-   findAllStoriesAndLinkToPivotal();
-  })
+
+  var pjaxContainer = document.querySelector('#js-repo-pjax-container');
+  var observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if (mutation.type === 'childList'){
+        findAllStoriesAndLinkToPivotal();
+        return;
+      }
+    });
+  });
+  observer.observe(pjaxContainer, {childList: true});
 
 }());
