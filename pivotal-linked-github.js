@@ -122,17 +122,23 @@
       }
     }
   }
+
+  function isATargetOfInterest(target){
+    return target.classList.contains('comment-body') ||
+      target.classList.contains('js-discussion') ||
+      target.id === 'js-repo-pjax-container'
+  }
   findAllStoriesAndLinkToPivotal();
 
   var pjaxContainer = document.querySelector('#js-repo-pjax-container');
   var observer = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {
-      if (mutation.type === 'childList'){
+      if (isATargetOfInterest(mutation.target) && mutation.type === 'childList'){
         findAllStoriesAndLinkToPivotal();
         return;
       }
     });
   });
-  observer.observe(pjaxContainer, {childList: true});
+  observer.observe(pjaxContainer, {childList: true, subtree: true});
 
 }());
