@@ -131,14 +131,16 @@
   findAllStoriesAndLinkToPivotal();
 
   var pjaxContainer = document.querySelector('#js-repo-pjax-container');
-  var observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
-      if (isATargetOfInterest(mutation.target) && mutation.type === 'childList'){
-        findAllStoriesAndLinkToPivotal();
-        return;
-      }
+  if (pjaxContainer){
+    var observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        if (isATargetOfInterest(mutation.target) && mutation.type === 'childList'){
+          findAllStoriesAndLinkToPivotal();
+          return;
+        }
+      });
     });
-  });
-  observer.observe(pjaxContainer, {childList: true, subtree: true});
+    observer.observe(pjaxContainer, {childList: true, subtree: true});
+  }
 
 }());
