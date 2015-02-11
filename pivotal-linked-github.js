@@ -78,6 +78,7 @@
   function createPivotalLink(storyId){
     var link = document.createElement('a');
     link.setAttribute('href', 'https://www.pivotaltracker.com/story/show/' + storyId.slice(1));
+    link.setAttribute('target', '_blank');
     link.innerHTML = storyId;
     return link;
   }
