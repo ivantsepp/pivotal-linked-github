@@ -111,7 +111,7 @@
   }
 
   function findAllStoriesAndLinkToPivotal(){
-    var nodes = document.querySelectorAll('.comment-body, .commit-title, .commit-message');
+    var nodes = document.querySelectorAll('.js-issue-title, .comment-body, .commit-title, .commit-message');
 
     for (var i = 0; i < nodes.length; i++){
       var textNodes = getTextNodesUnder(nodes[i]);
